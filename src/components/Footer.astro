@@ -1,0 +1,128 @@
+---
+// src/components/Footer.astro
+---
+
+<footer class="simple-footer">
+  <div class="footer-links-grid">
+    <div class="link-column">
+      <strong>資源</strong>
+      <a href="/getting-started/intro/">使用教學</a>
+      <a href="/reference/commands/">指令列表</a>
+      <a href="#">更新日誌</a>
+      <a href="#">用戶條款</a>
+    </div>
+
+    <div class="link-column">
+      <strong>關於</strong>
+      <a href="#">了解我們</a>
+      <a href="#">開發團隊</a>
+      <a href="#">開發日誌</a>
+      <a href="#">Github</a>
+    </div>
+
+    <div class="link-column">
+      <strong>更多連結</strong>
+      <a href="#">邀請連結</a>
+      <a href="#">官方伺服</a>
+      <a href="#">DST 頁面</a>
+      <a href="#">源碼</a>
+    </div>
+  </div>
+
+  <div class="footer-brand-section">
+    <span class="brought-to-you">特別為您呈現</span>
+    <div class="froggy">
+      🐸 <span>froggy</span>
+    </div>
+    <p class="brand-desc">
+      Froggy 是一隻有時候會罷工的 Discord 機器人。<br />
+      由無數的 Bug 與無數的崩潰所驅動。
+    </p>
+  </div>
+</footer>
+
+<style>
+  .simple-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6rem 1rem 4rem;
+  }
+
+  .footer-links-grid {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 6vw;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 900px;
+    margin-bottom: 5rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid var(--sl-color-hairline, #e5e7eb);
+  }
+
+  .link-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    min-width: 140px;
+    margin: 0;
+  }
+
+  .link-column strong {
+    color: var(--sl-color-white);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+
+  .link-column a {
+    font-size: 0.95rem;
+    text-decoration: none !important;
+    transition: color 0.2s;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .link-column a:hover {
+    color: var(--sl-color-text-accent);
+  }
+
+  .footer-brand-section {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .brought-to-you {
+    font-size: 0.875rem;
+    color: var(--sl-color-gray-3);
+    margin-bottom: 0.75rem;
+  }
+
+  .froggy {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--sl-color-white);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .froggy span {
+    letter-spacing: -0.02em;
+  }
+
+  .brand-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--sl-color-gray-2);
+  }
+</style>

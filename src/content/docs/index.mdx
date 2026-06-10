@@ -1,40 +1,105 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
+title: Froggy
+description: Froggy，一個爛 Discord 機器人。
 template: splash # Remove or comment out this line to display the site sidebar on this page.
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: 功能不全的 Discord 機器人，還時不時會壞掉。
   image:
     file: ../../assets/houston.webp
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: 快速開始
+      link: /getting-started/intro/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
+    - text: 邀女僕
+      link: /reference/commands/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import FeatureCard from '../../components/FeatureCard.astro';
+import ReviewCard from '../../components/ReviewCard.astro';
+import Cta from '../../components/Cta.astro';
+import Footer from '../../components/Footer.astro';
 
-## Next steps
+import outputGif from '../../assets/output.gif';
 
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
+## 功能
+
+<CardGrid>
+	<FeatureCard title="斜線指令系統" icon="square-slash">
+		輸入 `/` 就能看到所有指令，不用記前綴、不用翻文件。
+	</FeatureCard>
+	<FeatureCard title="天氣查詢" icon="cloud-sun">
+		`/astro tonight <地區>`
+
+		查今晚的天氣、氣溫、降雨機率，還會提醒你要不要帶傘。
+
+		夜衝、約會、下班想看夜景都很方便。
+	</FeatureCard>
+	<FeatureCard title="主頁查詢" icon="info">
+		`/steam <用戶名稱>`
+
+		查公開的 Steam 遊戲資訊，包括最近遊玩的遊戲、總時數和成就進度。
+
+		另外也有 YouTube 和 Hearts of Iron IV 的查詢功能。
+	</FeatureCard>
+	<FeatureCard title="MyGo!!!!! 彩蛋" icon="egg" image={outputGif.src}>
+		如果你 `@Froggy`
+		
+		Froggy 會應激，然後回覆你 `我……從來沒覺得……玩樂隊開心過。`。
+	</FeatureCard>
 </CardGrid>
+
+## 用戶評價
+
+<CardGrid>
+	<ReviewCard 
+		userId="830618219646943244"
+		rating={1}
+	>
+		爛 bot
+	</ReviewCard>
+	<ReviewCard 
+		userId="1130334020740321431"
+		rating={1}
+	>
+		爛 bot
+	</ReviewCard>
+	<ReviewCard 
+		userId="644504218798915634"
+		rating={1}
+	>
+		爛 bot
+	</ReviewCard>
+	<ReviewCard 
+		userId="622373851333918720"
+		rating={1}
+	>
+		爛 bot
+	</ReviewCard>
+	<ReviewCard 
+		userId="969237753957068860"
+		rating={1}
+	>
+		爛 bot
+	</ReviewCard>
+	<ReviewCard 
+		userId="883289855965147146"
+		rating={1}
+	>
+		爛 bot
+	</ReviewCard>
+</CardGrid>
+
+<Cta 
+  title="什麼？看了那麼久你還沒邀請？！"
+  description="別再猶豫了，今天就把這隻女僕青蛙帶回家吧！"
+  buttonText="邀請 Froggy"
+  buttonLink="/reference/commands/"
+
+  secondaryButtonText="支援伺服器"
+  secondaryButtonLink="/reference/commands/"
+/>
+
+<Footer />
