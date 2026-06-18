@@ -24,7 +24,15 @@ export default defineConfig({
         },
         {
           label: "指令參考",
-          items: [{ autogenerate: { directory: "reference" } }],
+          items: [
+            { label: "指令總覽", slug: "reference/commands" },
+            { label: "音樂播放", slug: "reference/music" },
+            { label: "主頁查詢", slug: "reference/profile" },
+            { label: "娛樂類", slug: "reference/entertain" },
+            { label: "管理/版主類", slug: "reference/admin" },
+            { label: "工具類", slug: "reference/tools" },
+
+          ],
         },
       ],
       customCss: ["./src/styles/theme.css"],
