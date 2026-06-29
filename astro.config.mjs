@@ -1,13 +1,31 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
+import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "http://localhost:4321/",
   integrations: [
     starlight({
-      title: "Froggy 文檔",
+      title: "Froggy",
+      logo: {
+        light: "./src/assets/icons/froggy-blk.svg",
+        dark: "./src/assets/icons/froggy-wht.svg",
+        replacesTitle: true,
+      },
+      locales: {
+        root: {
+          label: "繁體中文",
+          lang: "zh-TW",
+        },
+      },
       social: [
+        {
+          icon: "discord",
+          label: "Discord",
+          href: "https://discord.gg/U3DW4cNkMd",
+        },
         {
           icon: "github",
           label: "GitHub",
@@ -17,25 +35,35 @@ export default defineConfig({
       sidebar: [
         {
           label: "快速開始",
+          items: [{ label: "簡介與邀請", slug: "getting-started" }],
+        },
+
+        {
+          label: "操作指南",
           items: [
-            { label: "介紹", slug: "getting-started/intro" },
-            { label: "邀請機器人", slug: "getting-started/invite" },
+            { label: "主頁查询", slug: "guides/profile" },
+            { label: "伺服器管理", slug: "guides/admin" },
+            { label: "娛樂功能", slug: "guides/entertain" },
+            { label: "音樂功能", slug: "guides/music" },
           ],
         },
         {
-          label: "指令參考",
-          items: [
-            { label: "指令總覽", slug: "reference/commands" },
-            { label: "音樂播放", slug: "reference/music" },
-            { label: "主頁查詢", slug: "reference/profile" },
-            { label: "娛樂類", slug: "reference/entertain" },
-            { label: "管理/版主類", slug: "reference/admin" },
-            { label: "工具類", slug: "reference/tools" },
-
-          ],
+          label: "參考資料",
+          items: [{ label: "指令總覽", slug: "reference/commands" }],
         },
       ],
+      components: {
+        PageSidebar: "./src/components/starlight/PageSidebar.astro",
+        Head: "./src/components/starlight/Head.astro",
+      },
+      editLink: {
+        baseUrl: "https://github.com/MyGoFeatSuch/froggy-docs/edit/main/",
+      },
       customCss: ["./src/styles/theme.css"],
     }),
+    tailwind({ applyBaseStyles: false }),
   ],
+  markdown: {
+    gfm: true,
+  },
 });

@@ -1,0 +1,364 @@
+---
+import { Image } from "astro:assets";
+import Hero from "../components/home/Hero.astro";
+import ReviewSection from "../components/home/ReviewSection.astro";
+import Qna from "../components/home/Qna.astro";
+import QnaItem from "../components/home/QnaItem.astro";
+import froggyShield from "../assets/images/froggy-shield.png";
+import froggyMusic from "../assets/images/froggy-music.png";
+import froggyFunction from "../assets/images/froggy-function.png";
+import screenshot from "../assets/images/screenshot.png";
+import froggyLogo from "../assets/icons/froggy-wht.svg";
+import "../styles/theme.css";
+import "../tailwind.css";
+---
+
+<!doctype html>
+<html lang="zh-TW" class="overflow-x-hidden">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Froggy | 最好用的 Discord 多功能機器人</title>
+    <meta
+      name="description"
+      content="Froggy 是一隻多功能 Discord 機器人，提供伺服器管理、音樂播放、實用工具與娛樂指令。立即邀請，讓 Froggy 成為你伺服器的好幫手！"
+    />
+
+    <!-- og = ?, open graph ✕, original gangster ✓ -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta
+      property="og:title"
+      content="Froggy | 最好用的 Discord 多功能機器人"
+    />
+    <meta
+      property="og:description"
+      content="Froggy 是一隻多功能 Discord 機器人，提供伺服器管理、音樂播放、實用工具與娛樂指令。立即邀請，讓 Froggy 成為你伺服器的好幫手！"
+    />
+    <meta
+      property="og:image"
+      content={new URL("/og/index.png", Astro.url).href}
+    />
+
+    <!-- Twitter https://kb.theseoframework.com/kb/twitter-cards-and-x-sharing/ -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url.href} />
+    <meta
+      property="twitter:title"
+      content="Froggy | 最好用的 Discord 多功能機器人"
+    />
+    <meta
+      property="twitter:description"
+      content="Froggy 是一隻多功能 Discord 機器人，提供伺服器管理、音樂播放、實用工具與娛樂指令。立即邀請，讓 Froggy 成為你伺服器的好幫手！"
+    />
+    <meta
+      property="twitter:image"
+      content={new URL("/og/index.png", Astro.url).href}
+    />
+
+    <style></style>
+  </head>
+  <body
+    class="bg-dark-bg text-white min-h-screen font-sans antialiased overflow-x-hidden"
+  >
+    <!-- Navbar -->
+    <nav
+      class="px-6 md:px-16 lg:px-24 xl:px-32 py-4 flex items-center justify-between relative z-50"
+    >
+      <!-- Logo -->
+      <a
+        href="/"
+        class="flex items-center gap-3 no-underline z-10 hover:opacity-90 transition-opacity"
+      >
+        <img
+          src={froggyLogo.src}
+          alt="Froggy Logo"
+          width="120"
+          height="40"
+          class="h-8 md:h-10 w-auto"
+        />
+      </a>
+
+      <!-- Desktop Nav Items -->
+      <div
+        class="hidden md:flex items-center justify-center gap-8 absolute left-1/2 -translate-x-1/2"
+      >
+        <a
+          href="/getting-started"
+          class="text-sm md:text-base font-medium text-white/80 hover:text-white transition-colors no-underline"
+          >指令文檔</a
+        >
+        <a
+          href="https://github.com/MyGoFeatSuch/froggy-docs"
+          target="_blank"
+          class="text-sm md:text-base font-medium text-white/80 hover:text-white transition-colors no-underline"
+          >GitHub</a
+        >
+        <a
+          href="https://discord.gg/U3DW4cNkMd"
+          target="_blank"
+          class="text-sm md:text-base font-medium text-white/80 hover:text-white transition-colors no-underline"
+          >更新日志</a
+        >
+        <a
+          href="https://discord.gg/U3DW4cNkMd"
+          target="_blank"
+          class="text-sm md:text-base font-medium text-white/80 hover:text-white transition-colors no-underline"
+          >用戶條款</a
+        >
+      </div>
+
+      <!-- Right Side & Mobile Hamburger -->
+      <div class="flex items-center gap-4 z-50">
+        <a
+          href="#"
+          class="hidden md:block px-4 py-2 bg-gray-100/10 hover:bg-gray-100/20 text-white text-sm font-bold rounded-lg transition-colors no-underline"
+          >邀請機器人</a
+        >
+        <button
+          id="mobileMenuBtn"
+          class="md:hidden flex flex-col gap-1.5 cursor-pointer bg-transparent border-0 p-1 relative z-50"
+        >
+          <span
+            id="bar1"
+            class="block w-6 h-0.5 bg-white transition-transform duration-300"
+          ></span>
+          <span
+            id="bar2"
+            class="block w-6 h-0.5 bg-white transition-opacity duration-300"
+          ></span>
+          <span
+            id="bar3"
+            class="block w-6 h-0.5 bg-white transition-transform duration-300"
+          ></span>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div
+        id="mobileMenu"
+        class="fixed inset-0 bg-[#141820]/95 backdrop-blur-xl flex-col justify-center items-center gap-8 md:hidden z-40 hidden opacity-0 transition-opacity duration-300"
+      >
+        <a
+          href="/getting-started"
+          class="text-3xl font-black text-white/80 hover:text-white transition-colors no-underline tracking-wide"
+          >指令文檔</a
+        >
+        <a
+          href="https://github.com/MyGoFeatSuch/froggy-docs"
+          target="_blank"
+          class="text-3xl font-black text-white/80 hover:text-white transition-colors no-underline tracking-wide"
+          >GitHub</a
+        >
+        <a
+          href="https://discord.gg/U3DW4cNkMd"
+          target="_blank"
+          class="text-3xl font-black text-white/80 hover:text-white transition-colors no-underline tracking-wide"
+          >更新日志</a
+        >
+        <a
+          href="https://discord.gg/U3DW4cNkMd"
+          target="_blank"
+          class="text-3xl font-black text-white/80 hover:text-white transition-colors no-underline tracking-wide"
+          >用戶條款</a
+        >
+        <a
+          href="#"
+          class="mt-4 px-8 py-4 bg-brand-blue text-white text-xl font-bold rounded-full hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/20 transition-all no-underline"
+          >邀請機器人</a
+        >
+      </div>
+    </nav>
+
+    <main>
+      <Hero />
+
+      <section
+        class="w-full bg-brand-blue py-12 sm:py-16 md:py-24 my-6 sm:my-8 md:my-20 overflow-hidden"
+      >
+        <div class="max-w-5xl mx-auto px-4 md:px-6 text-center">
+          <h1
+            class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-extrabold mb-6 sm:mb-8 text-white"
+          >
+            什麼是 Froggy？
+          </h1>
+          <h2
+            class="text-sm sm:text-base md:text-2xl leading-[1.8] font-bold text-white"
+          >
+            Froggy 是一隻多功能 Discord 機器人。你可以邀請它加入 Discord
+            伺服器。
+          </h2>
+          <Image
+            src={screenshot}
+            width={600}
+            class="w-full max-w-[260px] sm:max-w-sm md:max-w-md aspect-auto object-contain mx-auto block mt-8 sm:mt-10 md:mt-16"
+            alt="Froggy Screenshot"
+          />
+          <span
+            class="text-white text-sm sm:text-base md:text-xl font-medium tracking-wide mt-4 sm:mt-6 block"
+            >还是一如既往的 MyGO！</span
+          >
+        </div>
+      </section>
+
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="mb-12 sm:mb-16 md:mb-32">
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 text-center"
+          >
+            <div class="rounded-1xl bg-dark-surface">
+              <div class="flex flex-col p-6 sm:p-8 items-center">
+                <div class="w-32 h-32 sm:w-48 sm:h-48 mb-4 sm:mb-6 mx-auto">
+                  <Image
+                    src={froggyShield}
+                    width={300}
+                    alt="Shield Icon"
+                    class="w-full h-full object-contain"
+                  />
+                </div>
+                <h3
+                  class="text-xl sm:text-2xl font-bold mb-2 sm:mb-3"
+                  style="color:#ffffff"
+                >
+                  伺服器管理與安全
+                </h3>
+                <p
+                  class="text-base sm:text-lg leading-relaxed"
+                  style="color:rgba(255,255,255,0.8)"
+                >
+                  具備入伺驗證、反洗版以及各項管理工具，全方位維護你的伺服器秩序。
+                </p>
+              </div>
+            </div>
+
+            <div class="rounded-1xl bg-dark-surface">
+              <div class="flex flex-col p-6 sm:p-8 items-center">
+                <div class="w-32 h-32 sm:w-48 sm:h-48 mb-4 sm:mb-6 mx-auto">
+                  <Image
+                    src={froggyMusic}
+                    width={300}
+                    alt="Music Icon"
+                    class="w-full h-full object-contain"
+                  />
+                </div>
+                <h3
+                  class="text-xl sm:text-2xl font-bold mb-2 sm:mb-3"
+                  style="color:#ffffff"
+                >
+                  音樂播放
+                </h3>
+                <p
+                  class="text-base sm:text-lg leading-relaxed"
+                  style="color:rgba(255,255,255,0.8)"
+                >
+                  你可以與朋友一起在語音頻道享受音樂！
+                </p>
+              </div>
+            </div>
+
+            <div class="rounded-2xl bg-dark-surface">
+              <div class="flex flex-col p-6 sm:p-8 items-center">
+                <div class="w-32 h-32 sm:w-48 sm:h-48 mb-4 sm:mb-6 mx-auto">
+                  <Image
+                    src={froggyFunction}
+                    width={300}
+                    alt="Function Icon"
+                    class="w-full h-full object-contain"
+                  />
+                </div>
+                <h3
+                  class="text-xl sm:text-2xl font-bold mb-2 sm:mb-3"
+                  style="color:#ffffff"
+                >
+                  娛樂與實用工具
+                </h3>
+                <p
+                  class="text-base sm:text-lg leading-relaxed"
+                  style="color:rgba(255,255,255,0.8)"
+                >
+                  Froggy 帶來各種娛樂指令、生活實用工具，天文與天氣查詢等功能。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mb-12 md:mb-24">
+          <h2 class="text-3xl md:text-5xl font-black mb-4 text-white">
+            來自用戶的心聲
+          </h2>
+          <ReviewSection />
+        </div>
+
+        <Qna title="一些常見問題">
+          <QnaItem question="如何邀請 Froggy 到我的伺服器？" checked={true}>
+            你可以透過官網上的邀請連結，並選擇你擁有管理員權限的伺服器來完成邀請。
+          </QnaItem>
+          <QnaItem question="Froggy 安全嗎？我的伺服器信息會不會泄露？">
+            MyGoFeatSuch 團隊為 Froggy 打造了一個穩定的安全系統。MyGoFeatSuch
+            團隊只具備讀取伺服器 ID，特定功能的使用者 ID 與頻道 ID。
+          </QnaItem>
+          <QnaItem question="Froggy 是免費的嗎？">
+            是的！Froggy 的所有功能都是完全免費供大家使用。
+          </QnaItem>
+          <QnaItem question="Froggy 好像有一點壞掉了，我該如何尋求幫助？">
+            你可以加入我們的支援伺服器，開發團隊會很樂意協助你解決任何問題。
+          </QnaItem>
+          <QnaItem question="Froggy 太可愛了！我可以創作同人作嗎？">
+            當然可以！Froggy 知道它爲他製作了同人作品一定會很開心！
+          </QnaItem>
+          <QnaItem question="爲什麽音質那麽差？😡">
+            我們對此感到非常抱歉 😔。由於 Froggy
+            的家屋漏偏逢連夜雨。網絡與能效問題會導致傳送音頻時導致不穩定。你可以通過<a
+              href="/guides/music/"
+              class="text-brand-blue hover:underline font-bold">文檔</a
+            >來排查是否爲 Froggy 太爛而導致音質差。
+          </QnaItem>
+        </Qna>
+      </div>
+    </main>
+
+    <script>
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+
+      if (mobileMenuBtn) {
+        let menuOpen = false;
+        mobileMenuBtn.addEventListener("click", () => {
+          menuOpen = !menuOpen;
+          const menu = document.getElementById("mobileMenu");
+          const bar1 = document.getElementById("bar1");
+          const bar2 = document.getElementById("bar2");
+          const bar3 = document.getElementById("bar3");
+
+          if (menuOpen) {
+            menu?.classList.remove("hidden");
+            requestAnimationFrame(() => {
+              menu?.classList.remove("opacity-0");
+              menu?.classList.add("opacity-100", "flex");
+            });
+          } else {
+            menu?.classList.remove("opacity-100");
+            menu?.classList.add("opacity-0");
+            setTimeout(() => {
+              menu?.classList.add("hidden");
+              menu?.classList.remove("flex");
+            }, 300); // match duration-300
+          }
+
+          if (bar1)
+            bar1.style.transform = menuOpen
+              ? "translateY(8px) rotate(45deg)"
+              : "";
+          if (bar2) bar2.style.opacity = menuOpen ? "0" : "1";
+          if (bar3)
+            bar3.style.transform = menuOpen
+              ? "translateY(-8px) rotate(-45deg)"
+              : "";
+
+          // Lock body scroll
+          document.body.style.overflow = menuOpen ? "hidden" : "";
+        });
+      }
+    </script>
+  </body>
+</html>

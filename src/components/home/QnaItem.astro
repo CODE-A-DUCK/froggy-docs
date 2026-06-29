@@ -1,0 +1,91 @@
+---
+interface Props {
+  question: string;
+  checked?: boolean;
+}
+
+const { question, checked = false } = Astro.props;
+---
+
+<!-- Supported Makrdown, cause I need the 'Links' thing <3 -->
+<div
+  class="border-b border-white/10 py-5 md:py-6 w-full qna-item"
+  data-checked={checked ? "true" : "false"}
+>
+  <button
+    class="flex items-center justify-between cursor-pointer qna-trigger select-none w-full text-left bg-transparent border-0"
+    aria-expanded="false"
+  >
+    <h3 class="text-lg md:text-2xl font-bold text-white pr-4 m-0">
+      {question}
+    </h3>
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class="transition-transform duration-500 ease-in-out shrink-0 text-white/50 qna-icon"
+    >
+      <path
+        d="m4.5 7.2 3.793 3.793a1 1 0 0 0 1.414 0L13.5 7.2"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+  </button>
+  <div
+    class="text-base md:text-lg text-white/70 transition-all duration-500 ease-in-out opacity-0 max-h-0 -translate-y-2 pt-0 qna-body overflow-hidden"
+  >
+    <div class="mt-4 md:mt-6">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<script>
+  const initQna = () => {
+    const qnaItems = document.querySelectorAll(".qna-item:not(.initialized)");
+
+    qnaItems.forEach((item) => {
+      item.classList.add("initialized");
+      const trigger = item.querySelector(".qna-trigger");
+      const body = item.querySelector(".qna-body");
+      const icon = item.querySelector(".qna-icon");
+
+      const isChecked = item.getAttribute("data-checked") === "true";
+      if (isChecked && body && icon && trigger) {
+        body.classList.add("opacity-100", "max-h-[800px]", "translate-y-0");
+        body.classList.remove("opacity-0", "max-h-0", "-translate-y-2");
+        icon.classList.add("rotate-180");
+        trigger.setAttribute("aria-expanded", "true");
+      }
+
+      trigger?.addEventListener("click", () => {
+        const isOpen = body?.classList.contains("opacity-100");
+        document.querySelectorAll(".qna-item").forEach((otherItem) => {
+          const otherBody = otherItem.querySelector(".qna-body");
+          const otherIcon = otherItem.querySelector(".qna-icon");
+          const otherTrigger = otherItem.querySelector(".qna-trigger");
+
+          otherBody?.classList.remove(
+            "opacity-100",
+            "max-h-[800px]",
+            "translate-y-0",
+          );
+          otherBody?.classList.add("opacity-0", "max-h-0", "-translate-y-2");
+          otherIcon?.classList.remove("rotate-180");
+          otherTrigger?.setAttribute("aria-expanded", "false");
+        });
+        if (!isOpen && body && icon && trigger) {
+          body.classList.add("opacity-100", "max-h-[800px]", "translate-y-0");
+          body.classList.remove("opacity-0", "max-h-0", "-translate-y-2");
+          icon.classList.add("rotate-180");
+          trigger.setAttribute("aria-expanded", "true");
+        }
+      });
+    });
+  };
+  initQna();
+</script>

@@ -1,0 +1,179 @@
+---
+title: 音樂功能
+description: YouTube 音樂播放與清單管理
+---
+
+Froggy 的音乐指令列表与功能讲解。
+
+---
+
+## 加入語音頻道
+
+为提供更好的体验。我们建议你在使用播放音乐指令之前，请使用 `/music join`(加入) 或 `/music leave`(离开) 指令来让 Froggy 進出你当前所在的语音频道。
+
+- `/music join`：加入語音頻道。
+- `/music leave`：離開語音頻道。
+
+<video
+  src="/img/music_join.mp4"
+  autoplay
+  loop
+  muted
+  playsinline
+  style="width: 80%;"
+></video>
+
+> `/music join` 使用範式
+
+<video
+  src="/img/music_leave.mp4"
+  autoplay
+  loop
+  muted
+  playsinline
+  style="width: 80%;"
+></video>
+
+> `/music leave` 使用範式
+
+---
+
+## 點播音樂
+
+Froggy 支持通过 YouTube 链接或关键词搜索来播放音乐。
+
+- **連結播放**：`/music play <YouTube網址>`
+- **關鍵字搜尋**：`/music search <關鍵字>`
+
+<video
+  src="/img/music_play.mp4"
+  autoplay
+  loop
+  muted
+  playsinline
+  style="width: 80%;"
+></video>
+
+> `/music play <YouTube網址>` 使用範式
+
+<video
+  src="/img/music_search.mp4"
+  autoplay
+  loop
+  muted
+  playsinline
+  style="width: 80%;"
+></video>
+
+> `/music search <關鍵字>` 使用範式
+
+:::tip
+`/music search` 支援多選
+:::
+
+---
+
+## 控制按钮
+
+我们提供了一系列控制按钮来更好的管理音乐播放状态。
+
+播放時提供的互動式控制按鈕：
+
+| 按鈕            | 功能                       |
+| :-------------- | :------------------------- |
+| **暫停 / 繼續** | 控制播放狀態               |
+| **跳過**        | 播放下一首                 |
+| **循環**        | 關閉 / 循環清單 / 單曲循環 |
+| **網址**        | 開啟 YouTube 原網頁        |
+| **收藏 / 移除** | 管理個人收藏               |
+
+<video
+  src="/img/music_control.mp4"
+  autoplay
+  loop
+  muted
+  playsinline
+  style="width: 80%;"
+></video>
+
+:::tip
+若目前頻道訊息過多，您可以使用 `/music controller` 重新傳送音樂控制器訊息。
+:::
+
+---
+
+## 播放列表管理
+
+Froggy 支持播放列表管理，你可以使用以下指令来管理播放列表：
+
+- **清空列表**：`/music stop` (立刻停止播放並清空清單)
+- **查看與移除**：`/music queue` (點選歌曲即可移除)
+
+<video
+  src="/img/music_stop.mp4"
+  autoplay
+  loop
+  muted
+  playsinline
+  style="width: 80%;"
+></video>
+
+> `/music stop` 使用範式
+
+:::danger
+`/music stop` 會立刻清除播放目前歌曲並清空清單。
+:::
+
+<video
+  src="/img/music_queue.mp4"
+  autoplay
+  loop
+  muted
+  playsinline
+  style="width: 80%;"
+></video>
+
+> `/music queue` 使用範式
+
+## 音樂庫
+
+我们為每位使用者提供私有的音樂庫，用於收藏、播放、移除喜歡的音樂。
+
+你能通过[控制按钮](#控制按钮)來收藏当前歌曲至你的音樂或使用以下指令：
+
+- **收藏**：`/music library add <網址>`
+- **移除**：`/music library remove <index>`
+- **列出**：`/music library list`
+- **播放**：`/music library play <index>`
+
+:::note
+关于 `/music library play <index>` 指令, `<index>` 是歌曲在庫中的歌曲编号。 除此之外，Froggy 支持多首播放（队列）。
+
+指令如下：
+
+```
+/music queue play 1,2,3
+```
+
+请务必使用 `,` 分隔多个歌曲编号。
+:::
+
+## 總結
+
+~~恭喜你掌握了 Froggy 的音樂指令。好棒棒~~
+
+以下是音乐指令大綱：
+
+| 指令                    | 功能                        |
+| :---------------------- | :-------------------------- |
+| `/music join`           | 加入頻道並播放音樂          |
+| `/music leave`          | 離開頻道並停止播放          |
+| `/music play`           | 播放指定 YouTube 網址的歌曲 |
+| `/music search`         | 搜尋並播放符合關鍵字的歌曲  |
+| `/music controller`     | 重新傳送音樂控制器訊息      |
+| `/music stop`           | 停止播放並清空清單          |
+| `/music queue`          | 查看與移除播放列表中的歌曲  |
+| `/music library add`    | 收藏指定網址的歌曲至音樂庫  |
+| `/music library remove` | 移除音樂庫中的歌曲          |
+| `/music library list`   | 列出音樂庫中的所有歌曲      |
+| `/music library play`   | 播放音樂庫中的歌曲          |

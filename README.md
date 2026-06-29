@@ -1,9 +1,19 @@
-# Froggy 官方文檔
+# Froggy 的指令文檔
 
 ---
 
-Froggy 邀回家後會飛會噴火會單手搖混凝土會拖拉機軸承拆卸與安裝有善心下雨天把傘給別人自己搖花手飛回去會斯拜修姆光線會忍術會會水遁。
+# froggy-docs
 
-```bush
-npm install
+```bash
+cd froggy-docs && npm install
+
+npm run dev
+```
+
+Build & preview:
+
+```bash
+npm run build
+
+npm run preview
 ```
