@@ -1,0 +1,64 @@
+---
+import { Image } from "astro:assets";
+import froggyImg from "../../assets/images/froggy.png";
+---
+
+<section
+  class="w-full min-h-[calc(100vh-80px)] flex justify-center items-center py-8 sm:py-12 lg:py-0 overflow-hidden"
+>
+  <div
+    class="max-w-6xl w-full mx-auto px-4 sm:px-6 flex flex-col lg:flex-row-reverse items-center justify-between gap-8 sm:gap-12 lg:gap-20"
+  >
+    <!-- Image -->
+    <div
+      class="relative w-44 h-44 sm:w-64 sm:h-64 lg:w-[450px] lg:h-[450px] shrink-0 flex justify-center items-center"
+    >
+      <div class="absolute inset-0 bg-[#676767] rounded-full -z-10"></div>
+      <Image
+        src={froggyImg}
+        alt="Froggy"
+        width={800}
+        loading="eager"
+        fetchpriority="high"
+        class="w-[90%] h-[90%] object-contain drop-shadow-2xl relative z-10"
+      />
+    </div>
+
+    <div
+      class="flex flex-col items-center lg:items-start text-center lg:text-left flex-1 w-full max-w-2xl"
+    >
+      <h1
+        class="text-3xl sm:text-6xl lg:text-7xl font-black mb-4 sm:mb-6 leading-[1.1] tracking-tight"
+      >
+        <span class="text-white">青蛙</span><br />
+        <span class="text-brand-blue">Discord 機器人</span>
+        <br />
+        <span class="text-white">思考</span>
+        <span class="text-brand-blue">每一天。</span>
+      </h1>
+
+      <p
+        class="text-base md:text-xl text-white/80 mb-6 sm:mb-10 font-medium tracking-wide"
+      >
+        傻子 Discord 機器人。
+      </p>
+
+      <div
+        class="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full justify-center lg:justify-start"
+      >
+        <a
+          href="https://discord.com/oauth2/authorize?client_id=67676767676767"
+          class="flex justify-center items-center bg-brand-blue text-white rounded-full w-full sm:w-60 h-14 sm:h-20 text-lg sm:text-2xl font-black transition-opacity hover:opacity-90 no-underline"
+        >
+          邀女僕
+        </a>
+        <a
+          href="/getting-started"
+          class="flex justify-center items-center bg-gray-700 text-white rounded-full w-full sm:w-60 h-14 sm:h-20 text-lg sm:text-2xl font-black transition-opacity hover:opacity-90 no-underline"
+        >
+          指令文檔
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

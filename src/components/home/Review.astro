@@ -1,0 +1,35 @@
+---
+// src/components/Review.astro
+interface Props {
+  name?: string;
+  avatar?: string;
+}
+
+const {
+  name = "未知用户",
+  avatar = "https://cdn.discordapp.com/embed/avatars/0.png",
+} = Astro.props;
+---
+
+<div
+  class="w-full sm:w-80 md:w-[350px] flex flex-col items-start p-6 md:p-8 rounded-2xl"
+>
+  <p
+    class="text-base md:text-lg mt-5 flex-grow font-medium leading-relaxed"
+    style="color: rgba(255,255,255,0.75);"
+  >
+    <slot />
+  </p>
+  <div class="flex items-center gap-4 mt-6 w-full pt-2">
+    <img
+      class="h-12 w-12 rounded-full object-cover shadow-md"
+      src={avatar}
+      alt={name}
+    />
+    <div>
+      <h2 class="text-lg font-bold tracking-wide" style="color: #ffffff;">
+        {name}
+      </h2>
+    </div>
+  </div>
+</div>

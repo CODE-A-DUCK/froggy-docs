@@ -1,0 +1,128 @@
+---
+import MobileTableOfContents from "virtual:starlight/components/MobileTableOfContents";
+import TableOfContents from "virtual:starlight/components/TableOfContents";
+import { Icon } from "@astrojs/starlight/components";
+const issueUrl = "https://github.com/MyGoFeatSuch/froggy-docs/issues/new";
+---
+
+{
+  Astro.locals.starlightRoute.toc && (
+    <>
+      <div class="lg:sl-hidden">
+        <MobileTableOfContents />
+      </div>
+      <div class="right-sidebar-panel sl-hidden lg:sl-block">
+        <div class="sl-container">
+          <TableOfContents />
+          <a href={issueUrl} target="_blank" class="cf-action-link">
+            <Icon name="github" size="1rem" /> 錯誤回報
+          </a>
+        </div>
+      </div>
+    </>
+  )
+}
+
+<script>
+  class CfTocIndicator extends HTMLElement {
+    connectedCallback() {
+      setTimeout(() => {
+        const nav = document.querySelector("starlight-toc nav");
+        if (!nav) return;
+
+        const indicator = document.createElement("div");
+        indicator.className = "cf-active-indicator";
+        nav.style.position = "relative";
+        nav.appendChild(indicator);
+
+        const links = nav.querySelectorAll("a");
+
+        const update = (target) => {
+          const active = target || nav.querySelector('a[aria-current="true"]');
+          if (active) {
+            const navRect = nav.getBoundingClientRect();
+            const activeRect = active.getBoundingClientRect();
+            const offsetTop = activeRect.top - navRect.top;
+
+            indicator.style.transform = `translateY(${offsetTop}px)`;
+            indicator.style.height = `${activeRect.height}px`;
+            indicator.style.opacity = "1";
+          } else {
+            indicator.style.opacity = "0";
+          }
+        };
+
+        const observer = new MutationObserver(() => update());
+        links.forEach((link) => {
+          observer.observe(link, {
+            attributes: true,
+            attributeFilter: ["aria-current"],
+          });
+          link.addEventListener("mouseenter", () => update(link));
+          link.addEventListener("mouseleave", () => update());
+        });
+
+        update();
+        window.addEventListener("resize", () => update());
+      }, 50);
+    }
+  }
+  customElements.define("cf-toc-indicator", CfTocIndicator);
+</script>
+<cf-toc-indicator></cf-toc-indicator>
+
+<style>
+  @layer starlight.core {
+    .right-sidebar-panel {
+      padding: 1rem var(--sl-sidebar-pad-x);
+    }
+    .sl-container {
+      width: calc(var(--sl-sidebar-width) - 2 * var(--sl-sidebar-pad-x));
+    }
+    .right-sidebar-panel :global(h2) {
+      color: var(--sl-color-white);
+      font-size: var(--sl-text-h5);
+      font-weight: 600;
+      line-height: var(--sl-line-height-headings);
+      margin-bottom: 0.5rem;
+    }
+    .right-sidebar-panel :global(:where(a)) {
+      display: block;
+      font-size: var(--sl-text-xs);
+      text-decoration: none;
+      color: var(--sl-color-gray-3);
+      overflow-wrap: anywhere;
+    }
+    .right-sidebar-panel :global(:where(a):hover) {
+      color: var(--sl-color-white);
+    }
+    @media (min-width: 72rem) {
+      .sl-container {
+        max-width: calc(
+          (
+            (
+                100vw - var(--sl-sidebar-width) - 2 * var(--sl-content-pad-x) -
+                  2 * var(--sl-sidebar-pad-x)
+              ) *
+              0.25 /* MAGIC NUMBER :pensive: */
+          )
+        );
+      }
+    }
+  }
+
+  .cf-action-link {
+    display: flex !important;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    font-size: var(--sl-text-sm) !important;
+    color: var(--sl-color-gray-2) !important;
+    text-decoration: none !important;
+  }
+
+  .cf-action-link:hover {
+    color: var(--sl-color-white) !important;
+    text-decoration: underline !important;
+  }
+</style>

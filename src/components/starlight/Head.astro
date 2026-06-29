@@ -1,0 +1,17 @@
+---
+import type { Props } from "@astrojs/starlight/props";
+import Default from "@astrojs/starlight/components/Head.astro";
+
+const rawId = Astro.props.id || Astro.props.entry?.id;
+let slug = rawId
+  ? rawId.replace(/\.[^/.]+$/, "")
+  : Astro.url.pathname.replace(/^\/|\/$/g, "");
+if (!slug || slug === "") slug = "index";
+
+const ogImageUrl = new URL(`/og/${slug}.png`, Astro.url);
+---
+
+<Default {...Astro.props}><slot /></Default>
+
+<meta property="og:image" content={ogImageUrl} />
+<meta name="twitter:image" content={ogImageUrl} />

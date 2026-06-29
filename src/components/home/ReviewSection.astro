@@ -1,0 +1,61 @@
+---
+// src/components/ReviewSection.astro
+import ReviewCard from "./Review.astro";
+
+const reviews = [
+  { userId: "830618219646943244", content: "爛 bot" },
+  { userId: "1130334020740321431", content: "爛 bot" },
+  { userId: "644504218798915634", content: "爛 bot" },
+  { userId: "622373851333918720", content: "爛 bot" },
+  { userId: "969237753957068860", content: "爛 bot" },
+  { userId: "883289855965147146", content: "爛 bot" },
+];
+
+const token = import.meta.env.DISCORD_TOKEN;
+
+const enrichedReviews = await Promise.all(
+  reviews.map(async (review) => {
+    let name = "Unknown User";
+    let avatar = "https://cdn.discordapp.com/embed/avatars/0.png";
+
+    if (token) {
+      try {
+        const res = await fetch(
+          `https://discord.com/api/v10/users/${review.userId}`,
+          {
+            headers: {
+              Authorization: `Bot ${token}`,
+            },
+          },
+        );
+        if (res.ok) {
+          const data = await res.json();
+          name = data.global_name || data.username || name;
+          if (data.avatar) {
+            avatar = `https://cdn.discordapp.com/avatars/${review.userId}/${data.avatar}.png?size=128`;
+          }
+        }
+      } catch (e) {
+        console.error(`無法獲取 Discord 用戶 ${review.userId} 的資料:`, e);
+      }
+    } else {
+      if (review.userId === reviews[0].userId) {
+        console.warn("找不到 DISCORD_TOKEN，將使用預設的使用者名稱與頭像。");
+      }
+    }
+    return { content: review.content, name, avatar };
+  }),
+);
+---
+
+<div
+  class="flex flex-wrap justify-center gap-5 md:gap-8 mt-12 md:mt-16 text-left w-full max-w-7xl mx-auto not-content"
+>
+  {
+    enrichedReviews.map((review) => (
+      <ReviewCard name={review.name} avatar={review.avatar}>
+        {review.content}
+      </ReviewCard>
+    ))
+  }
+</div>
