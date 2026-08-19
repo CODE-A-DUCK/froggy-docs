@@ -1,5 +1,4 @@
 ---
-// src/components/ReviewSection.astro
 import ReviewCard from "./Review.astro";
 
 const reviews = [
@@ -32,7 +31,7 @@ const enrichedReviews = await Promise.all(
           const data = await res.json();
           name = data.global_name || data.username || name;
           if (data.avatar) {
-            avatar = `https://cdn.discordapp.com/avatars/${review.userId}/${data.avatar}.png?size=128`;
+            avatar = `https://cdn.discordapp.com/avatars/${review.userId}/${data.avatar}.webp?size=96`;
           }
         }
       } catch (e) {

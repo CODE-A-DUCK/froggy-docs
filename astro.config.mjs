@@ -1,14 +1,33 @@
-// @ts-check
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import tailwind from "@astrojs/tailwind";
 
-// https://astro.build/config
 export default defineConfig({
   site: "http://localhost:4321/",
+  compressHTML: true,
+  devToolbar: {
+    enabled: false,
+  },
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: "viewport",
+  },
+  build: {
+    inlineStylesheets: "always",
+  },
+  vite: {
+    build: {
+      cssMinify: true,
+      minify: "esbuild",
+    },
+    esbuild: {
+      drop: ["console", "debugger"],
+    },
+  },
   integrations: [
     starlight({
       title: "Froggy",
+      favicon: "/favicon.svg",
       logo: {
         light: "./src/assets/icons/froggy-blk.svg",
         dark: "./src/assets/icons/froggy-wht.svg",
@@ -63,7 +82,4 @@ export default defineConfig({
     }),
     tailwind({ applyBaseStyles: false }),
   ],
-  markdown: {
-    gfm: true,
-  },
 });

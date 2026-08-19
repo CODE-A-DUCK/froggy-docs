@@ -1,8 +1,8 @@
 import { OGImageRoute } from "astro-og-canvas";
 import { getCollection } from "astro:content";
 
-// Get all Starlight documentation pages
-const docs = await getCollection("docs");
+// Get all Starlight documentation pages (excluding 404)
+const docs = (await getCollection("docs")).filter((doc) => doc.id !== "404");
 
 // Build a dic of all pages
 const pages = Object.fromEntries(

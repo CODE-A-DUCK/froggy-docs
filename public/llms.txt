@@ -1,0 +1,14 @@
+# Froggy Documentation
+> Froggy is a multi-purpose Discord bot offering server moderation, music features, game social profile lookups (Steam, YouTube, HOI4), and entertainment utilities.
+
+## Core Documentation
+- [Getting Started](/getting-started): Introduction, bot invitation guide, and initial setup for specific commands.
+- [Commands Overview](/reference/commands): Complete slash command list for moderation, music, entertainment, and profile lookups.
+- [Server Management](/guides/admin): Moderation tools, role management, timeout/bans, and server security features.
+- [Music Playback](/guides/music): Audio playback, queue management, voice controls, and personal music library.
+- [Profile Lookups](/guides/profile): Steam player stats, YouTube channel info, and Hearts of Iron IV lookups.
+- [Entertainment](/guides/entertain): Soundboard effects, random emojis, and utilities.
+
+## Community & Resources
+- [Support Discord](https://discord.gg/U3DW4cNkMd): Official Discord support server.
+- [GitHub Repository](https://github.com/MyGoFeatSuch/froggy-docs): Documentation source code and issue tracker.
